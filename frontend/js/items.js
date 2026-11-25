@@ -103,7 +103,7 @@ function displayItems(items) {
         // Display uploaded image
         if (item.image) {
             const img = document.createElement("img");
-            img.src = `http://https://campus-lost-found-la7c.onrender.com${item.image}`;
+            img.src = "//https://campus-lost-found-la7c.onrender.com${item.image}";
             img.alt = item.title;
             img.style.width = "100%";
             img.style.maxHeight = "180px";
@@ -142,6 +142,7 @@ function displayItems(items) {
 }
 
 
+
 async function submitClaim(itemId) {
     const token = localStorage.getItem("token");
 
@@ -155,24 +156,36 @@ async function submitClaim(itemId) {
     if (!message || !message.trim()) return;
 
     try {
-        const response = await fetch("http://https://campus-lost-found-la7c.onrender.com/api/claims", {
-            method: "POST",
-            headers: {
-    "Authorization": `Bearer ${token}`
-},
-            body: JSON.stringify({
-                itemId,
-                message
-            })
-        });
+        const response = await fetch(
+            "https://campus-lost-found-la7c.onrender.com/api/claims",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    itemId,
+                    message: message.trim()
+                })
+            }
+        );
 
         const data = await response.json();
-        alert(data.message);
+
+        if (!response.ok) {
+            alert(data.message || "Unable to claim item.");
+            return;
+        }
+
+        alert(data.message || "Claim submitted successfully!");
 
     } catch (error) {
+        console.error("Claim error:", error);
         alert("Unable to connect to server.");
     }
 }
+
 
 
 
@@ -324,7 +337,7 @@ async function loadMyClaims() {
     }
 
     try {
-        const response = await fetch("http://https://campus-lost-found-la7c.onrender.com/api/claims/my-claims", {
+        const response = await fetch("https://campus-lost-found-la7c.onrender.com/api/claims/my-claims", {
             cache: "no-store",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -385,7 +398,7 @@ async function loadAdminClaims() {
 
     try {
         const response = await fetch(
-            "http://https://campus-lost-found-la7c.onrender.com/api/claims/all",
+            "//https://campus-lost-found-la7c.onrender.com/api/claims/all",
             {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -455,7 +468,7 @@ async function updateAdminClaim(claimId, status) {
 
     try {
         const response = await fetch(
-            `http://https://campus-lost-found-la7c.onrender.com/api/claims/${claimId}`,
+            "//https://campus-lost-found-la7c.onrender.com/api/claims/${claimId}",
             {
                 method: "PUT",
                 headers: {
