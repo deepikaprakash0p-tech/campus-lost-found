@@ -20,27 +20,29 @@
 
     <section class="features">
         <h1>Admin Dashboard</h1>
+
         <div class="feature-container">
-    <div class="feature-card">
-        <h3>Total Items</h3>
-        <h2 id="totalItems">0</h2>
-    </div>
+            <div class="feature-card">
+                <h3>Total Items</h3>
+                <h2 id="totalItems">0</h2>
+            </div>
 
-    <div class="feature-card">
-        <h3>Pending Items</h3>
-        <h2 id="pendingItems">0</h2>
-    </div>
+            <div class="feature-card">
+                <h3>Pending Items</h3>
+                <h2 id="pendingItems">0</h2>
+            </div>
 
-    <div class="feature-card">
-        <h3>Approved Items</h3>
-        <h2 id="approvedItems">0</h2>
-    </div>
+            <div class="feature-card">
+                <h3>Approved Items</h3>
+                <h2 id="approvedItems">0</h2>
+            </div>
 
-    <div class="feature-card">
-        <h3>Rejected Items</h3>
-        <h2 id="rejectedItems">0</h2>
-    </div>
-</div>
+            <div class="feature-card">
+                <h3>Rejected Items</h3>
+                <h2 id="rejectedItems">0</h2>
+            </div>
+        </div>
+
         <p>Welcome to the Campus Lost & Found Admin Panel!</p>
 
         <div class="hero-buttons">
@@ -52,42 +54,47 @@
     <footer>
         <p>© 2026 Campus Lost & Found Portal</p>
     </footer>
-<script>
-async function loadAdminStats() {
-    const token = localStorage.getItem("token");
 
-    try {
-        const response = await fetch(
-            "http://https://campus-lost-found-la7c.onrender.com/api/items/stats",
-            {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
+    <script>
+        async function loadAdminStats() {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("Please login as admin.");
+                window.location.href = "login.html";
+                return;
             }
-        );
 
-        const data = await response.json();
+            try {
+                const response = await fetch(
+                    "https://campus-lost-found-la7c.onrender.com/api/items/stats",
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    }
+                );
 
-        if (!response.ok) {
-            alert(data.message || "Unable to load statistics");
-            return;
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.message || "Unable to load statistics");
+                    return;
+                }
+
+                document.getElementById("totalItems").textContent = data.totalItems;
+                document.getElementById("pendingItems").textContent = data.pendingItems;
+                document.getElementById("approvedItems").textContent = data.approvedItems;
+                document.getElementById("rejectedItems").textContent = data.rejectedItems;
+
+            } catch (error) {
+                alert("Server connection failed.");
+                console.error(error);
+            }
         }
 
-        document.getElementById("totalItems").textContent = data.totalItems;
-        document.getElementById("pendingItems").textContent = data.pendingItems;
-        document.getElementById("approvedItems").textContent = data.approvedItems;
-        document.getElementById("rejectedItems").textContent = data.rejectedItems;
-
-    } catch (error) {
-        alert("Server connection failed.");
-    }
-}
-
-loadAdminStats();
-</script>
-</body>
-
+        loadAdminStats();
+    </script>
 
 </body>
 </html>
-
