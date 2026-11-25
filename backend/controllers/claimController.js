@@ -5,8 +5,7 @@ const Item = require("../models/Item");
 // CREATE A CLAIM
 const createClaim = async (req, res) => {
     try {
-        const { itemId, message } = req.body;
-
+const { itemId, message } = req.body || {};
         if (!itemId || !message) {
             return res.status(400).json({
                 message: "Item ID and message are required"
