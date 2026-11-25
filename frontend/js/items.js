@@ -103,7 +103,7 @@ function displayItems(items) {
         // Display uploaded image
         if (item.image) {
             const img = document.createElement("img");
-            img.src = `http://localhost:5000${item.image}`;
+            img.src = `http://https://campus-lost-found-la7c.onrender.com${item.image}`;
             img.alt = item.title;
             img.style.width = "100%";
             img.style.maxHeight = "180px";
@@ -155,7 +155,7 @@ async function submitClaim(itemId) {
     if (!message || !message.trim()) return;
 
     try {
-        const response = await fetch("http://localhost:5000/api/claims", {
+        const response = await fetch("http://https://campus-lost-found-la7c.onrender.com/api/claims", {
             method: "POST",
             headers: {
     "Authorization": `Bearer ${token}`
@@ -268,7 +268,7 @@ async function loadMyItems() {
             // Display uploaded image
             if (item.image) {
                 const img = document.createElement("img");
-                img.src = `http://localhost:5000${item.image}`;
+                img.src = `http://https://campus-lost-found-la7c.onrender.com${item.image}`;
                 img.alt = item.title;
                 img.style.width = "100%";
                 img.style.maxHeight = "180px";
@@ -324,7 +324,7 @@ async function loadMyClaims() {
     }
 
     try {
-        const response = await fetch("http://localhost:5000/api/claims/my-claims", {
+        const response = await fetch("http://https://campus-lost-found-la7c.onrender.com/api/claims/my-claims", {
             cache: "no-store",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -385,7 +385,7 @@ async function loadAdminClaims() {
 
     try {
         const response = await fetch(
-            "http://localhost:5000/api/claims/all",
+            "http://https://campus-lost-found-la7c.onrender.com/api/claims/all",
             {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -455,7 +455,7 @@ async function updateAdminClaim(claimId, status) {
 
     try {
         const response = await fetch(
-            `http://localhost:5000/api/claims/${claimId}`,
+            `http://https://campus-lost-found-la7c.onrender.com/api/claims/${claimId}`,
             {
                 method: "PUT",
                 headers: {
