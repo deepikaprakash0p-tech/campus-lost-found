@@ -1,6 +1,5 @@
 
-const API_URL = "http://localhost:5000/api/auth";
-
+const API_URL = "https://campus-lost-found-la7c.onrender.com/api/auth";
 // REGISTER
 const registerForm = document.getElementById("registerForm");
 
