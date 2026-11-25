@@ -142,7 +142,6 @@ function displayItems(items) {
 }
 
 
-
 async function submitClaim(itemId) {
     const token = localStorage.getItem("token");
 
@@ -156,36 +155,24 @@ async function submitClaim(itemId) {
     if (!message || !message.trim()) return;
 
     try {
-        const response = await fetch(
-            "https://campus-lost-found-la7c.onrender.com/api/claims",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    itemId,
-                    message: message.trim()
-                })
-            }
-        );
+        const response = await fetch("https://campus-lost-found-la7c.onrender.com/api/claims", {
+            method: "POST",
+            headers: {
+    "Authorization": `Bearer ${token}`
+},
+            body: JSON.stringify({
+                itemId,
+                message
+            })
+        });
 
         const data = await response.json();
-
-        if (!response.ok) {
-            alert(data.message || "Unable to claim item.");
-            return;
-        }
-
-        alert(data.message || "Claim submitted successfully!");
+        alert(data.message);
 
     } catch (error) {
-        console.error("Claim error:", error);
         alert("Unable to connect to server.");
     }
 }
-
 
 
 
@@ -386,19 +373,21 @@ loadMyClaims();
 
 const adminClaimsContainer = document.getElementById("adminClaimsContainer");
 
+
 async function loadAdminClaims() {
     if (!adminClaimsContainer) return;
 
     const token = localStorage.getItem("token");
 
     if (!token) {
-        adminClaimsContainer.innerHTML = "<p>Please login as admin.</p>";
+        adminClaimsContainer.innerHTML =
+            "<p>Please login as admin.</p>";
         return;
     }
 
     try {
         const response = await fetch(
-            "//https://campus-lost-found-la7c.onrender.com/api/claims/all",
+            "https://campus-lost-found-la7c.onrender.com/api/claims/all",
             {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -419,7 +408,8 @@ async function loadAdminClaims() {
         adminClaimsContainer.innerHTML = "";
 
         if (claims.length === 0) {
-            adminClaimsContainer.innerHTML = "<p>No claim requests found.</p>";
+            adminClaimsContainer.innerHTML =
+                "<p>No claim requests found.</p>";
             return;
         }
 
@@ -458,17 +448,19 @@ async function loadAdminClaims() {
         });
 
     } catch (error) {
+        console.error("Admin claims error:", error);
         adminClaimsContainer.innerHTML =
             "<p>Server connection failed.</p>";
     }
 }
+
 
 async function updateAdminClaim(claimId, status) {
     const token = localStorage.getItem("token");
 
     try {
         const response = await fetch(
-            "//https://campus-lost-found-la7c.onrender.com/api/claims/${claimId}",
+            `https://campus-lost-found-la7c.onrender.com/api/claims/${claimId}`,
             {
                 method: "PUT",
                 headers: {
@@ -481,18 +473,20 @@ async function updateAdminClaim(claimId, status) {
 
         const data = await response.json();
 
-        alert(data.message);
+        alert(data.message || "Claim updated.");
 
         if (response.ok) {
             loadAdminClaims();
         }
 
     } catch (error) {
+        console.error("Update claim error:", error);
         alert("Server connection failed.");
     }
 }
 
 loadAdminClaims();
+
  
 // ---------------------------------
 // ADMIN ITEM MANAGEMENT
