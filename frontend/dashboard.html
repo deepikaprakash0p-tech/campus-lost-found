@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Campus Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h2>Campus Lost & Found</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="report.html">Report Item</a>
+
+            <a href="login.html" onclick="localStorage.clear()">Logout</a>
+        </nav>
+    </header>
+
+    <section class="features">
+        <h1>Student Dashboard</h1>
+        <p>Welcome to Campus Lost & Found Portal!</p>
+
+        <div class="hero-buttons">
+            <a href="report.html" class="btn">Report Lost / Found</a>
+            <a href="my-items.html" class="btn secondary">My Reports</a>
+            <a href="my-claims.html" class="btn secondary">My Claims</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Lost & Found Items</h2>
+        <div class="search-container">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by item name, category or location..."
+    >
+
+    <select id="typeFilter">
+        <option value="all">All Items</option>
+        <option value="lost">Lost Items</option>
+        <option value="found">Found Items</option>
+    </select>
+    <select id="dateSort">
+    <option value="newest">Newest First</option>
+    <option value="oldest">Oldest First</option>
+</select>
+</div>
+
+        <div id="itemsContainer" class="feature-container">
+            <p>Loading items...</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Campus Lost & Found Portal</p>
+    </footer>
+
+    <script src="js/items.js"></script>
+</body>
+</html>

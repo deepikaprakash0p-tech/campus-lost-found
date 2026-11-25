@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Campus Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h2>Campus Lost & Found</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="admin-claims.html">Manage Claims</a>
+            <a href="login.html" onclick="localStorage.clear()">Logout</a>
+        </nav>
+    </header>
+
+    <section class="features">
+        <h1>Admin Dashboard</h1>
+        <div class="feature-container">
+    <div class="feature-card">
+        <h3>Total Items</h3>
+        <h2 id="totalItems">0</h2>
+    </div>
+
+    <div class="feature-card">
+        <h3>Pending Items</h3>
+        <h2 id="pendingItems">0</h2>
+    </div>
+
+    <div class="feature-card">
+        <h3>Approved Items</h3>
+        <h2 id="approvedItems">0</h2>
+    </div>
+
+    <div class="feature-card">
+        <h3>Rejected Items</h3>
+        <h2 id="rejectedItems">0</h2>
+    </div>
+</div>
+        <p>Welcome to the Campus Lost & Found Admin Panel!</p>
+
+        <div class="hero-buttons">
+            <a href="admin-items.html" class="btn">Manage Items</a>
+            <a href="admin-claims.html" class="btn secondary">Manage Claims</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Campus Lost & Found Portal</p>
+    </footer>
+<script>
+async function loadAdminStats() {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await fetch(
+            "http://localhost:5000/api/items/stats",
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Unable to load statistics");
+            return;
+        }
+
+        document.getElementById("totalItems").textContent = data.totalItems;
+        document.getElementById("pendingItems").textContent = data.pendingItems;
+        document.getElementById("approvedItems").textContent = data.approvedItems;
+        document.getElementById("rejectedItems").textContent = data.rejectedItems;
+
+    } catch (error) {
+        alert("Server connection failed.");
+    }
+}
+
+loadAdminStats();
+</script>
+</body>
+
+
+</body>
+</html>
+

@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Item - Campus Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h2>Campus Lost & Found</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <section class="form-container">
+        <h1>Report an Item</h1>
+        <p>Provide details about your lost or found item.</p>
+
+        <form id="reportForm">
+
+            <input type="text" id="title"
+                placeholder="Item Name" required>
+
+            <textarea id="description"
+                placeholder="Item Description" required></textarea>
+
+            <input type="text" id="category"
+                placeholder="Category (e.g. ID Card, Bag)" required>
+                <label for="image">Upload Item Image</label>
+<input type="file" id="image" accept="image/*">
+
+            <input type="text" id="location"
+                placeholder="Location" required>
+
+            <select id="type" required>
+                <option value="">Select Item Type</option>
+                <option value="lost">Lost Item</option>
+                <option value="found">Found Item</option>
+            </select>
+
+            <button type="submit" class="btn">
+                Submit Report
+            </button>
+
+        </form>
+    </section>
+
+    <script src="js/items.js"></script>
+</body>
+</html>

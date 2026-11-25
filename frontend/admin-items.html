@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Items - Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h2>Campus Lost & Found</h2>
+        <nav>
+            <a href="admin-dashboard.html">Admin Dashboard</a>
+            <a href="admin-claims.html">Manage Claims</a>
+            <a href="login.html" onclick="localStorage.clear()">Logout</a>
+        </nav>
+    </header>
+
+    <section class="features">
+        <h1>Manage Item Reports</h1>
+        <p>Approve or reject student reports.</p>
+
+        <div id="adminItemsContainer" class="feature-container">
+            <p>Loading items...</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Campus Lost & Found Portal</p>
+    </footer>
+
+    <script src="js/items.js"></script>
+</body>
+</html>

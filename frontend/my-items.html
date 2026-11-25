@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reports - Campus Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h2>Campus Lost & Found</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="login.html" onclick="localStorage.clear()">Logout</a>
+        </nav>
+    </header>
+
+    <section class="features">
+        <h1>My Reports</h1>
+        <p>View the items you have reported.</p>
+
+        <div id="myItemsContainer" class="feature-container">
+            <p>Loading your reports...</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Campus Lost & Found Portal</p>
+    </footer>
+
+    <script src="js/items.js"></script>
+</body>
+</html>
